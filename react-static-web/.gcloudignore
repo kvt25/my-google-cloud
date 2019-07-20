@@ -1,0 +1,11 @@
+.gcloudignore
+.git
+.gitignore
+#!include:.gitignore
+
+#Ignore /public and /src
+/public
+/src
+
+#Explicitly include build folder
+!/build
