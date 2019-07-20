@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app-springboot-deployment
+  labels:
+    app: web-app-springboot
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-app-springboot
+  template:
+    metadata:
+      labels:
+        app: web-app-springboot
+    spec:
+      containers:
+      - name: web-app-springboot
+        image: gcr.io/kien-python-samples/web-app-springboot:latest
+        ports:
+        - containerPort: 9000
+        readinessProbe:
+          httpGet:
+            path: /app
+            port: 9000
+            httpHeaders:
+            - name: Custom-Header
+              value: Awesomeness
+          initialDelaySeconds: 3
+          periodSeconds: 3
+      nodeSelector:
+        type: web-app

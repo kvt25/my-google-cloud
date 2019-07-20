@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-https
+  annotations:
+    kubernetes.io/ingress.allow-http: "false"
+spec:
+  tls:
+  - secretName: nginx-ingress-ssl
+  backend:
+    serviceName: nginx-1-r8d96
+    servicePort: 80
+  rules:
+  - http:
+      paths:
+      - path: /app
+        backend:
+          serviceName: web-app-springboot-svc
+          servicePort: 9000
