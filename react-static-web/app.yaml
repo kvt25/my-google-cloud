@@ -1,0 +1,15 @@
+runtime: python37
+service: react-app-kien
+
+handlers:
+- url: /
+  static_files: build/index.html
+  upload: build/index.html
+
+- url: /(.*)
+  static_files: build/\1
+  upload: build/(.*)
+
+- url: /aa.txt
+  static_files: aa.txt
+  upload: /aa.txt
